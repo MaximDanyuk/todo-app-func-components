@@ -1,4 +1,3 @@
-Стили писал не я
 # «ToDo App» - проектная работа для [Ката](https://kata.academy/frontend/postpayment)
 
 ## О проекте
