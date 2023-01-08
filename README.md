@@ -19,4 +19,4 @@
 
 ## Ссылка на проект:
 
-- [Проект на Github Pages](https://fdfgdfhdsde)
+- [Проект на Vercel]([https://fdfgdfhdsde](https://todo-app-sooty-chi.vercel.app))
