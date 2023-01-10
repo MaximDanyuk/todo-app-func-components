@@ -20,4 +20,4 @@
 
 ## Ссылка на проект:
 
-- [Проект на Vercel]([https://todo-app-sooty-chi.vercel.app](https://todo-app-sooty-chi.vercel.app))
+- [Проект на Vercel](https://todo-app-sooty-chi.vercel.app)
