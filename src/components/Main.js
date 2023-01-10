@@ -18,7 +18,7 @@ export default function Main({
     handleTaskDelete: PropTypes.func,
   };
   return (
-    <main className="content">
+    <main className="main">
       <TaskList
         tasksData={tasksData}
         handleTaskDelete={handleTaskDelete}

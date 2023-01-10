@@ -1,7 +1,11 @@
 import TasksFilter from './TasksFilter';
 import PropTypes from 'prop-types';
 
-export default function Footer({ toDoFilter, clearCompletedToDo }) {
+export default function Footer({
+  toDoFilter,
+  clearCompletedToDo,
+  tasksData,
+}) {
   Footer.defaultProps = {
     toDoFilter: {},
     clearCompletedToDo: {},
@@ -14,7 +18,9 @@ export default function Footer({ toDoFilter, clearCompletedToDo }) {
 
   return (
     <footer className="footer">
-      <span className="todo-count">1 items left</span>
+      <span className="todo-count">
+        {tasksData.length} items left
+      </span>
       <TasksFilter
         toDoFilter={toDoFilter}
         clearCompletedToDo={clearCompletedToDo}

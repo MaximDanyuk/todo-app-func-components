@@ -4,7 +4,9 @@ import Footer from './Footer';
 import { useState, useEffect } from 'react';
 
 export default function App() {
-  const [tasksData, setTasksData] = useState([]);
+  const [tasksData, setTasksData] = useState(
+    JSON.parse(localStorage.getItem('tasksData')) || [],
+  );
   const [filtered, setFiltered] = useState(tasksData);
   function handleTaskDelete({ _id }) {
     setTasksData(tasksData.filter((el) => el._id !== _id));
@@ -16,6 +18,10 @@ export default function App() {
     setTasksData([data, ...tasksData]);
     /// Add the card(data) to the array
   }
+
+  useEffect(() => {
+    localStorage.setItem('tasksData', JSON.stringify(tasksData));
+  }, [tasksData]);
 
   function handleTaskDone({ _id }) {
     const newToDo = tasksData.filter((elem) => {
@@ -31,7 +37,7 @@ export default function App() {
   }
 
   function toDoFilter(status) {
-    if (status === 'all') {
+    if (status.toLowerCase() === 'all') {
       setFiltered(tasksData);
     } else {
       const newTasksData = [...tasksData].filter(
@@ -58,7 +64,7 @@ export default function App() {
   }
 
   return (
-    <div className="page">
+    <div className="todoapp">
       <Header handleAddCard={(data) => handleAddCard(data)} />
       <Main
         tasksData={filtered}
@@ -68,6 +74,7 @@ export default function App() {
       <Footer
         toDoFilter={(status) => toDoFilter(status)}
         clearCompletedToDo={() => clearCompletedToDo()}
+        tasksData={filtered}
       />
     </div>
   );

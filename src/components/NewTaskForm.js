@@ -22,8 +22,7 @@ export default function NewTaskForm({ handleAddCard }) {
   function handleAddCardSubmit(evt) {
     /// Sending data to the card creation function on submit
     evt.preventDefault();
-    if (cardText.length === 0) {
-      alert('Pls text smth');
+    if (!cardText.length) {
       return;
     }
 
