@@ -50,9 +50,8 @@ export default function Task({
     isDone: PropTypes.bool,
   };
 
-  const className = isDone ? 'completed' : '';
   return (
-    <li className={className}>
+    <li className={isDone ? 'completed' : ''}>
       <div className="view">
         {change === _id ? (
           <form onSubmit={handleAddCardSubmit}>
@@ -64,6 +63,7 @@ export default function Task({
             <input
               className="toggle"
               type="checkbox"
+              defaultChecked={isDone}
               onClick={() => handleTaskDone({ _id })}
             />
             <label>

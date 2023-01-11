@@ -37,7 +37,10 @@ export default function App() {
   }
 
   function toDoFilter(status) {
-    if (status.toLowerCase() === 'all') {
+    if (
+      typeof status === 'string' &&
+      status.toLowerCase() === 'all'
+    ) {
       setFiltered(tasksData);
     } else {
       const newTasksData = [...tasksData].filter(
