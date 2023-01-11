@@ -16,7 +16,8 @@
 - Стили предоставила Ката
 - React JS
 - React Хуки
+- localStorage
 
 ## Ссылка на проект:
 
-- [Проект на Vercel]([https://fdfgdfhdsde](https://todo-app-sooty-chi.vercel.app))
+- [Проект на Vercel](https://todo-app-sooty-chi.vercel.app)
