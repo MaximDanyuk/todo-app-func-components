@@ -8,6 +8,8 @@ export default function App() {
     JSON.parse(localStorage.getItem('tasksData')) || [],
   );
   const [filtered, setFiltered] = useState(tasksData);
+  const [isSelected, setIsSelected] = useState('all');
+
   function handleTaskDelete({ _id }) {
     setTasksData(tasksData.filter((el) => el._id !== _id));
     /// Filter all tasks from remote
@@ -42,9 +44,11 @@ export default function App() {
       status.toLowerCase() === 'all'
     ) {
       setFiltered(tasksData);
+      setIsSelected('all');
     } else {
       const newTasksData = [...tasksData].filter(
         (el) => !!el.isDone === status,
+        setIsSelected(status),
       );
       setFiltered(newTasksData);
     }
@@ -78,6 +82,7 @@ export default function App() {
         toDoFilter={(status) => toDoFilter(status)}
         clearCompletedToDo={() => clearCompletedToDo()}
         tasksData={filtered}
+        isSelected={isSelected}
       />
     </div>
   );

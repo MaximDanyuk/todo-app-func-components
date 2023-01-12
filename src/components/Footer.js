@@ -5,6 +5,7 @@ export default function Footer({
   toDoFilter,
   clearCompletedToDo,
   tasksData,
+  isSelected,
 }) {
   Footer.defaultProps = {
     toDoFilter: {},
@@ -24,6 +25,7 @@ export default function Footer({
       <TasksFilter
         toDoFilter={toDoFilter}
         clearCompletedToDo={clearCompletedToDo}
+        isSelected={isSelected}
       />
     </footer>
   );

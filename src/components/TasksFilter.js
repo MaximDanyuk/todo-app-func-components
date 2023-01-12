@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 export default function TasksFilter({
   toDoFilter,
   clearCompletedToDo,
+  isSelected,
 }) {
   TasksFilter.defaultProps = {
     toDoFilter: {},
@@ -15,20 +16,34 @@ export default function TasksFilter({
   };
   /// Call the necessary functions on the necessary buttons
   return (
-    <div>
+    <>
       <ul className="filters">
         <li>
-          <button type="button" onClick={() => toDoFilter('all')}>
+          <button
+            type="button"
+            className={isSelected === 'all' ? 'selected' : null}
+            onClick={() => toDoFilter('all')}
+          >
             All
           </button>
         </li>
         <li>
-          <button type="button" onClick={() => toDoFilter(false)}>
+          <button
+            className={isSelected ? null : 'selected'}
+            type="button"
+            onClick={() => toDoFilter(false)}
+          >
             Active
           </button>
         </li>
         <li>
-          <button type="button" onClick={() => toDoFilter(true)}>
+          <button
+            className={
+              isSelected && isSelected !== 'all' ? 'selected' : null
+            }
+            type="button"
+            onClick={() => toDoFilter(true)}
+          >
             Completed
           </button>
         </li>
@@ -40,6 +55,6 @@ export default function TasksFilter({
       >
         Clear completed
       </button>
-    </div>
+    </>
   );
 }

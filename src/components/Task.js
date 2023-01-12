@@ -68,7 +68,7 @@ export default function Task({
             />
             <label>
               <span className="description">{totalValue}</span>
-              <span className="created">{created}</span>
+              <span className="created">created {created} ago</span>
             </label>
             <button
               aria-label="edit toDo"

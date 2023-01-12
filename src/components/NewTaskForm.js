@@ -29,7 +29,7 @@ export default function NewTaskForm({ handleAddCard }) {
     handleAddCard({
       taskText: cardText,
       _id: nextId(),
-      created: `created ${formatDistanceToNow(new Date())} ago`,
+      created: `${formatDistanceToNow(new Date())}`,
       /// formatDistanceToNow when created
       isDone: false,
     });
