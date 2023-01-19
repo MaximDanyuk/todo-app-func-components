@@ -8,7 +8,7 @@ export default function Task({
   handleTaskDelete,
   _id,
   handleTaskDone,
-  isDone,
+  status,
 }) {
   const [newValue, setNewValue] = useState('');
   const [totalValue, setTotalValue] = useState(taskText);
@@ -38,7 +38,6 @@ export default function Task({
     handleTaskDelete: {},
     _id: '',
     handleTaskDone: {},
-    isDone: false,
   };
 
   Task.propTypes = {
@@ -47,27 +46,26 @@ export default function Task({
     handleTaskDelete: PropTypes.func,
     _id: PropTypes.string,
     handleTaskDone: PropTypes.func,
-    isDone: PropTypes.bool,
   };
 
   return (
-    <li className={isDone ? 'completed' : ''}>
+    <li className={!status ? 'completed' : ''}>
       <div className="view">
         {change === _id ? (
           <form onSubmit={handleAddCardSubmit}>
             <input onChange={handleCardText} value={newValue} />
-            <button type="submit">Сохранить</button>
+            <input type="submit" value="Сохранить" />
           </form>
         ) : (
           <>
             <input
               className="toggle"
               type="checkbox"
-              defaultChecked={isDone}
+              defaultChecked={!status}
               onClick={() => handleTaskDone({ _id })}
             />
             <label>
-              <span className="description">{totalValue}</span>
+              <span className="title">{totalValue}</span>
               <span className="created">created {created} ago</span>
             </label>
             <button

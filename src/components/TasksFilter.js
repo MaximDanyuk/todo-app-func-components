@@ -29,20 +29,20 @@ export default function TasksFilter({
         </li>
         <li>
           <button
-            className={isSelected ? null : 'selected'}
+            className={
+              isSelected && isSelected !== 'all' ? 'selected' : null
+            }
             type="button"
-            onClick={() => toDoFilter(false)}
+            onClick={() => toDoFilter(true)}
           >
             Active
           </button>
         </li>
         <li>
           <button
-            className={
-              isSelected && isSelected !== 'all' ? 'selected' : null
-            }
+            className={isSelected ? null : 'selected'}
             type="button"
-            onClick={() => toDoFilter(true)}
+            onClick={() => toDoFilter(false)}
           >
             Completed
           </button>

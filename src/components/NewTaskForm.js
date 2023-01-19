@@ -22,7 +22,7 @@ export default function NewTaskForm({ handleAddCard }) {
   function handleAddCardSubmit(evt) {
     /// Sending data to the card creation function on submit
     evt.preventDefault();
-    if (!cardText.length) {
+    if (!cardText.trim().length) {
       return;
     }
 
@@ -31,7 +31,7 @@ export default function NewTaskForm({ handleAddCard }) {
       _id: nextId(),
       created: `${formatDistanceToNow(new Date())}`,
       /// formatDistanceToNow when created
-      isDone: false,
+      status: true,
     });
     setCardText('');
   }

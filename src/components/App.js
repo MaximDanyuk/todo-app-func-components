@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -7,11 +8,22 @@ export default function App() {
   const [tasksData, setTasksData] = useState(
     JSON.parse(localStorage.getItem('tasksData')) || [],
   );
-  const [filtered, setFiltered] = useState(tasksData);
   const [isSelected, setIsSelected] = useState('all');
+  const [filtered, setFiltered] = useState([]);
+
+  /* useEffect(() => {
+    setTasksData(JSON.parse(localStorage.getItem('tasksData')));
+    toDoFilter('all');
+  }, []); */
+
+  useEffect(() => {
+    localStorage.setItem('tasksData', JSON.stringify(tasksData));
+    setFiltered(tasksData);
+  }, [tasksData]);
 
   function handleTaskDelete({ _id }) {
-    setTasksData(tasksData.filter((el) => el._id !== _id));
+    const newTastData = tasksData.filter((el) => el._id !== _id);
+    setTasksData(newTastData);
     /// Filter all tasks from remote
     /// add new data in state
   }
@@ -21,53 +33,39 @@ export default function App() {
     /// Add the card(data) to the array
   }
 
-  useEffect(() => {
-    localStorage.setItem('tasksData', JSON.stringify(tasksData));
-  }, [tasksData]);
-
   function handleTaskDone({ _id }) {
     const newToDo = tasksData.filter((elem) => {
       if (elem._id === _id) {
-        elem.isDone = !elem.isDone;
+        if (elem.status) {
+          elem.status = false;
+        } else {
+          elem.status = true;
+        }
       }
       return elem;
     });
-    setTasksData(newToDo);
 
-    /// Find the passed element and change its isDane to the opposite
-    /// And add it in state
+    setTasksData(newToDo);
+  }
+
+  function clearCompletedToDo() {
+    const newTasksData = tasksData.filter((el) => el.status);
+    /// Filter state from Completed
+    setTasksData(newTasksData);
   }
 
   function toDoFilter(status) {
+    setIsSelected(status);
     if (
       typeof status === 'string' &&
       status.toLowerCase() === 'all'
     ) {
       setFiltered(tasksData);
-      setIsSelected('all');
+    } else if (!status) {
+      setFiltered(tasksData.filter((elem) => !elem.status));
     } else {
-      const newTasksData = [...tasksData].filter(
-        (el) => !!el.isDone === status,
-        setIsSelected(status),
-      );
-      setFiltered(newTasksData);
+      setFiltered(tasksData.filter((elem) => elem.status));
     }
-    /// If the status is all, then add everything to the filtered
-    /// Or we add to the filtered ones depending on the status
-  }
-
-  useEffect(() => {
-    setFiltered(tasksData);
-    /// When changing the state (adding new ones)
-    /// filter again
-  }, [tasksData]);
-
-  function clearCompletedToDo() {
-    const newTasksData = [...tasksData].filter(
-      (el) => el.isDone !== true,
-    );
-    /// Filter state from Completed
-    setTasksData(newTasksData);
   }
 
   return (

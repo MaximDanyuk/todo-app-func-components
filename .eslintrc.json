@@ -25,6 +25,7 @@
     "prettier"
   ],
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "no-underscore-dangle": "off",
     "no-param-reassign": "off",
     "react/state-in-constructor": 1,
