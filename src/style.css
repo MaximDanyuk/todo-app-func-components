@@ -89,6 +89,29 @@ body {
   margin-bottom: 0;
 }
 
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type='number'],
+input[type='number']:hover,
+input[type='number']:focus {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.timer__buttons {
+  width: 37px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.timer__text {
+  font-size: 14px;
+}
+
 .new-todo,
 .new-todo-form .new-todo-form__timer,
 .edit {
@@ -231,7 +254,7 @@ body {
 .todo-list li label {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   padding: 15px 85px 15px 60px;
 }
 
@@ -240,8 +263,12 @@ body {
 }
 
 .todo-list li label .description {
-  font-size: 13px;
-  color: gray;
+  font-size: 20px;
+}
+
+.description {
+  word-wrap: break-word;
+  width: 145px;
 }
 
 .todo-list li label .title {
@@ -253,7 +280,7 @@ body {
   color: #4d4d4d;
 }
 
-.todo-list li.completed label .title {
+.completed div label .description {
   color: #cdcdcd;
   text-decoration: line-through;
 }
@@ -297,7 +324,7 @@ body {
 
 .todo-list li .icon-pause,
 .todo-list li .icon-play {
-  font-size: 18px;
+  font-size: 13px;
   width: 18px;
   height: 18px;
 }
@@ -425,6 +452,18 @@ html .clear-completed:active {
   text-decoration: underline;
 }
 
+.created {
+  font-size: 10px !important;
+  color: gray;
+}
+
+.task-time {
+  font-size: 14px !important;
+  display: inline-block;
+  width: 51px;
+  word-wrap: break-word;
+}
+
 /*
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox
@@ -448,12 +487,4 @@ html .clear-completed:active {
   .filters {
     bottom: 10px;
   }
-}
-
-.created {
-  font-size: 14px !important;
-}
-
-.icon-pause {
-  margin-right: 10px !important;
 }

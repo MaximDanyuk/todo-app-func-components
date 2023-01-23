@@ -10,11 +10,7 @@ export default function App() {
   );
   const [isSelected, setIsSelected] = useState('all');
   const [filtered, setFiltered] = useState([]);
-
-  /* useEffect(() => {
-    setTasksData(JSON.parse(localStorage.getItem('tasksData')));
-    toDoFilter('all');
-  }, []); */
+  const [isCounting, setsCounting] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('tasksData', JSON.stringify(tasksData));
@@ -68,6 +64,23 @@ export default function App() {
     }
   }
 
+  function handleStart() {
+    setsCounting(true);
+  }
+
+  function handleStop(_id, newTime) {
+    setsCounting(false);
+
+    const newToDo = tasksData.filter((elem) => {
+      if (elem._id === _id) {
+        elem.totalTime = newTime;
+      }
+      return elem;
+    });
+
+    setTasksData(newToDo);
+  }
+
   return (
     <div className="todoapp">
       <Header handleAddCard={(data) => handleAddCard(data)} />
@@ -75,6 +88,9 @@ export default function App() {
         tasksData={filtered}
         handleTaskDelete={({ _id }) => handleTaskDelete({ _id })}
         handleTaskDone={({ _id }) => handleTaskDone({ _id })}
+        isCounting={isCounting}
+        handleStop={handleStop}
+        handleStart={handleStart}
       />
       <Footer
         toDoFilter={(status) => toDoFilter(status)}

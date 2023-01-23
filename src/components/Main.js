@@ -5,6 +5,9 @@ export default function Main({
   tasksData,
   handleTaskDelete,
   handleTaskDone,
+  isCounting,
+  handleStop,
+  handleStart,
 }) {
   Main.defaultProps = {
     tasksData: [],
@@ -23,6 +26,9 @@ export default function Main({
         tasksData={tasksData}
         handleTaskDelete={handleTaskDelete}
         handleTaskDone={handleTaskDone}
+        isCounting={isCounting}
+        handleStop={handleStop}
+        handleStart={handleStart}
       />
     </main>
   );

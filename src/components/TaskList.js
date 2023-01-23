@@ -6,6 +6,9 @@ export default function TaskList({
   tasksData,
   handleTaskDelete,
   handleTaskDone,
+  isCounting,
+  handleStop,
+  handleStart,
 }) {
   TaskList.defaultProps = {
     tasksData: [],
@@ -27,6 +30,9 @@ export default function TaskList({
           {...task}
           handleTaskDelete={handleTaskDelete}
           handleTaskDone={handleTaskDone}
+          isCounting={isCounting}
+          handleStop={handleStop}
+          handleStart={handleStart}
         />
       ))}
     </ul>
