@@ -1,6 +1,5 @@
+/* eslint-disable */
 import { useState } from 'react';
-import nextId from 'react-id-generator';
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import PropTypes from 'prop-types';
 
 export default function NewTaskForm({ handleAddCard }) {
@@ -32,17 +31,12 @@ export default function NewTaskForm({ handleAddCard }) {
   function handleAddCardSubmit(evt) {
     /// Sending data to the card creation function on submit
     evt.preventDefault();
-    if (!cardText.trim().length || +timeSec === 0 || +timeMin === 0) {
+    if (!cardText.trim().length) {
       return;
     }
-    handleAddCard({
-      taskText: cardText,
-      _id: nextId(),
-      created: `${formatDistanceToNow(new Date())}`,
-      /// formatDistanceToNow when created
-      status: true,
-      totalTime: timeMin * 60 + timeSec,
-    });
+    const fullTime = timeMin * 60 + timeSec;
+    handleAddCard({ cardText: cardText, fullTime: fullTime });
+
     setCardText('');
     setTimeSec('');
     setTimeMin('');
@@ -63,7 +57,8 @@ export default function NewTaskForm({ handleAddCard }) {
         onChange={handleCardMin}
         value={timeMin}
         type="number"
-        max={60}
+        maxLength={2}
+        max={59}
         min={0}
       />
       <input
@@ -71,9 +66,10 @@ export default function NewTaskForm({ handleAddCard }) {
         placeholder="Sec"
         onChange={handleCardSec}
         value={timeSec}
-        max={60}
-        min={0}
         type="number"
+        maxLength={2}
+        max={59}
+        min={0}
       />
     </form>
   );

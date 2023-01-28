@@ -20,7 +20,7 @@ export default function Footer({
   return (
     <footer className="footer">
       <span className="todo-count">
-        {tasksData.length} items left
+        {tasksData.filter((el) => el.status).length} items left
       </span>
       <TasksFilter
         toDoFilter={toDoFilter}

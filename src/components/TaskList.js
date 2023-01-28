@@ -6,9 +6,11 @@ export default function TaskList({
   tasksData,
   handleTaskDelete,
   handleTaskDone,
-  isCounting,
   handleStop,
   handleStart,
+  isSelected,
+  handleTaskEdit,
+  saveTimerTime,
 }) {
   TaskList.defaultProps = {
     tasksData: [],
@@ -30,9 +32,11 @@ export default function TaskList({
           {...task}
           handleTaskDelete={handleTaskDelete}
           handleTaskDone={handleTaskDone}
-          isCounting={isCounting}
+          isSelected={isSelected}
           handleStop={handleStop}
           handleStart={handleStart}
+          handleTaskEdit={handleTaskEdit}
+          saveTimerTime={saveTimerTime}
         />
       ))}
     </ul>

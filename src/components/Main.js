@@ -5,9 +5,11 @@ export default function Main({
   tasksData,
   handleTaskDelete,
   handleTaskDone,
-  isCounting,
   handleStop,
   handleStart,
+  isSelected,
+  handleTaskEdit,
+  saveTimerTime,
 }) {
   Main.defaultProps = {
     tasksData: [],
@@ -23,12 +25,14 @@ export default function Main({
   return (
     <main className="main">
       <TaskList
+        isSelected={isSelected}
         tasksData={tasksData}
         handleTaskDelete={handleTaskDelete}
         handleTaskDone={handleTaskDone}
-        isCounting={isCounting}
         handleStop={handleStop}
         handleStart={handleStart}
+        handleTaskEdit={handleTaskEdit}
+        saveTimerTime={saveTimerTime}
       />
     </main>
   );

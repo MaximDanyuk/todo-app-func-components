@@ -3,14 +3,16 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import { useState, useEffect } from 'react';
+import nextId from 'react-id-generator';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 export default function App() {
+  /*   localStorage.clear(); */
   const [tasksData, setTasksData] = useState(
     JSON.parse(localStorage.getItem('tasksData')) || [],
   );
   const [isSelected, setIsSelected] = useState('all');
   const [filtered, setFiltered] = useState([]);
-  const [isCounting, setsCounting] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('tasksData', JSON.stringify(tasksData));
@@ -24,12 +26,18 @@ export default function App() {
     /// add new data in state
   }
 
-  function handleAddCard(data) {
-    setTasksData([data, ...tasksData]);
+  function handleAddCard({ cardText, fullTime }) {
+    const newCard = {};
+    newCard.totalTime = fullTime;
+    newCard.taskText = cardText;
+    newCard._id = nextId();
+    newCard.created = `${formatDistanceToNow(new Date())}`;
+    newCard.status = true;
+    setTasksData([newCard, ...tasksData]);
     /// Add the card(data) to the array
   }
 
-  function handleTaskDone({ _id }) {
+  function handleTaskDone({ _id, newTime }) {
     const newToDo = tasksData.filter((elem) => {
       if (elem._id === _id) {
         if (elem.status) {
@@ -37,6 +45,7 @@ export default function App() {
         } else {
           elem.status = true;
         }
+        elem.totalTime = newTime;
       }
       return elem;
     });
@@ -64,13 +73,18 @@ export default function App() {
     }
   }
 
-  function handleStart() {
-    setsCounting(true);
+  function handleTaskEdit(_id, newTaskText) {
+    const newToDo = tasksData.filter((elem) => {
+      if (elem._id === _id) {
+        elem.taskText = newTaskText;
+      }
+      return elem;
+    });
+
+    setTasksData(newToDo);
   }
 
-  function handleStop(_id, newTime) {
-    setsCounting(false);
-
+  function saveTimerTime(_id, newTime) {
     const newToDo = tasksData.filter((elem) => {
       if (elem._id === _id) {
         elem.totalTime = newTime;
@@ -88,9 +102,9 @@ export default function App() {
         tasksData={filtered}
         handleTaskDelete={({ _id }) => handleTaskDelete({ _id })}
         handleTaskDone={({ _id }) => handleTaskDone({ _id })}
-        isCounting={isCounting}
-        handleStop={handleStop}
-        handleStart={handleStart}
+        isSelected={isSelected}
+        handleTaskEdit={handleTaskEdit}
+        saveTimerTime={saveTimerTime}
       />
       <Footer
         toDoFilter={(status) => toDoFilter(status)}
